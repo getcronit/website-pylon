@@ -29,7 +29,10 @@ COPY . .
 
 # [optional] tests & build
 ENV NODE_ENV=production
-# RUN bun test
+
+# Create .pylon folder (mkdir)
+RUN mkdir .pylon
+# RUN pylon build
 RUN bun run pylon build
 
 # copy production dependencies and source code into final image
