@@ -1,17 +1,26 @@
-import { defineService, logger, PylonAPI } from "@cronitio/pylon";
-import { caseStudyGenerator } from "./services/case-study-generator";
+import { auth, defineService, logger, PylonAPI } from "@cronitio/pylon";
+import { CaseStudyGenerator } from "./services/case-study-generator";
 
-export default defineService({
-  Query: {
-    hello() {
-      return "Hello, World!";
+export default defineService(
+  {
+    Query: {
+      hello() {
+        return "Hello, World!";
+      },
+    },
+    Mutation: {
+      generateCaseStudy: CaseStudyGenerator.generateCaseStudy,
     },
   },
-  Mutation: {
-    generateCaseStudy: caseStudyGenerator.generateCaseStudy,
-  },
-});
+  {
+    context: (c) => {
+      return c;
+    },
+  }
+);
 
 export const configureApp: PylonAPI["configureApp"] = (app) => {
   logger.info("Configuring app");
+
+  app.use("*", auth.initialize());
 };

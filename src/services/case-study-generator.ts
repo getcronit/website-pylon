@@ -1,4 +1,4 @@
-import { ServiceError, logger } from "@cronitio/pylon";
+import { ServiceError, getContext, logger, requireAuth } from "@cronitio/pylon";
 import { openai } from "./openai";
 import Joi from "joi";
 
@@ -55,8 +55,8 @@ export interface CaseStudy {
   content: string;
 }
 
-class CaseStudyGenerator {
-  private parseCaseStudy = (content: string): CaseStudy => {
+export class CaseStudyGenerator {
+  private static parseCaseStudy = (content: string): CaseStudy => {
     const schema = Joi.object({
       title: Joi.string().required(),
       description: Joi.string().required(),
@@ -92,7 +92,13 @@ class CaseStudyGenerator {
     }
   };
 
-  generateCaseStudy = (info: CaseStudyInfo): Promise<CaseStudy> => {
+  @requireAuth({
+    roles: ["admin"],
+  })
+  static generateCaseStudy(info: CaseStudyInfo): Promise<CaseStudy> {
+    const ctx = getContext();
+    const auth = ctx.get("auth");
+
     const sendOrRetry = async (count = 0) => {
       logger.info(`Generating case study for ${info.title}`, info);
 
@@ -111,6 +117,7 @@ class CaseStudyGenerator {
         response_format: {
           type: "json_object",
         },
+        user: auth.sub,
       });
 
       const contentString = result.choices[0].message.content;
@@ -128,7 +135,7 @@ class CaseStudyGenerator {
       }
 
       try {
-        return this.parseCaseStudy(contentString);
+        return CaseStudyGenerator.parseCaseStudy(contentString);
       } catch (e) {
         logger.error("Failed to parse case study", e);
         if (count < 3) {
@@ -146,7 +153,5 @@ class CaseStudyGenerator {
     };
 
     return sendOrRetry();
-  };
+  }
 }
-
-export const caseStudyGenerator = new CaseStudyGenerator();
