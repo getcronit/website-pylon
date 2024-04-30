@@ -1,15 +1,22 @@
 {
-  "name": "@cronitio/pylon-template",
+  "name": "@getcronit/website-pylon",
   "version": "0.0.1",
   "type": "module",
   "description": "Generated with `sf new`",
   "files": [
     "package.json"
   ],
+  "pylon": {
+    "external": [
+      "@cronitio/pylon"
+    ]
+  },
   "dependencies": {
     "@cronitio/pylon": "*",
     "@cronitio/pylon-builder": "*",
-    "@cronitio/pylon-server": "*"
+    "@cronitio/pylon-server": "*",
+    "joi": "^17.13.0",
+    "openai": "^4.39.0"
   },
   "devDependencies": {
     "commitizen": "^4.2.5",

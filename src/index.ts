@@ -1,10 +1,14 @@
 import { defineService, logger, PylonAPI } from "@cronitio/pylon";
+import { caseStudyGenerator } from "./services/case-study-generator";
 
 export default defineService({
   Query: {
     hello() {
       return "Hello, World!";
     },
+  },
+  Mutation: {
+    generateCaseStudy: caseStudyGenerator.generateCaseStudy,
   },
 });
 
