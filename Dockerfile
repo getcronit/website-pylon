@@ -2,8 +2,8 @@
 # see all versions at https://hub.docker.com/r/oven/bun/tags
 FROM oven/bun:1 as base
 
-LABEL description="This container serves as an entry point for our future Snek Function projects."
-LABEL org.opencontainers.image.source="https://github.com/cronitio/pylon-template"
+LABEL description="This container serves as an entry point for our future pylon projects."
+LABEL org.opencontainers.image.source="https://github.com/getcronit/website-pylon"
 LABEL maintainer="opensource@cronit.io"
 
 WORKDIR /usr/src/pylon
