@@ -30,7 +30,7 @@ export const configureApp: PylonAPI["configureApp"] = (app) => {
   app.use("*", auth.initialize());
 
   app.get(
-    "/ws",
+    "/transcribe",
     auth.require({
       roles: ["admin"],
     }),
