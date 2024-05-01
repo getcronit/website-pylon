@@ -11,11 +11,20 @@ The content you have been given is in the following format:
   "industry": "Industry",
   "services": ["Service 1", "Service 2", "Service 3"],
   "input": "Some input content",
-  "results": {
-    "impressions": 1000000,
-    "clicks": 50000,
-    "conversions": 500
-  }
+  "results": [
+    {
+      "name": "Result 1",
+      "value": "100"
+    },
+    {
+      "name": "Result 2",
+      "value": "200+"
+    },
+    {
+      "name": "Result 3",
+      "value": "High"
+    }
+  ]
 }
 
 You need to format this content into a case study that looks like this (JSON format):
@@ -44,9 +53,10 @@ export interface CaseStudyInfo {
   industry: string;
   services: string[];
   input: string;
-  results: {
-    [key: string]: number;
-  };
+  results: Array<{
+    name: string;
+    value: string;
+  }>;
 }
 
 export interface CaseStudy {
