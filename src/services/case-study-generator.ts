@@ -38,13 +38,14 @@ The content should be in markdown format and should include the following inform
 Challenges: A description of the challenges the client was facing
 Solution: A description of the solution that was provided
 Results: A description of the results that were achieved
-Technologies: A list of technologies that were used in the project <TagList tags={["Technology 1", "Technology 2", "Technology 3"]} />
+Technologies: A list of technologies that were used in the project <TagList><TagListItem>Technology 1</TagListItem><TagListItem>Technology 2</TagListItem></TagList>
 Blockquote: <Blockquote text="Some quote from the client" author="Client Name" />
 
 
 Do not include the title in the content, as it will be added automatically.
 The language used in the case study should be professional and should highlight the success of the project.
 The language (German, English, French) of the case study should be based on the language of the input content.
+Make sure the MDX content is formatted correctly.
 `;
 
 export interface CaseStudyInfo {
