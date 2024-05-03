@@ -40,9 +40,13 @@ export const configureApp: PylonAPI["configureApp"] = (app) => {
           const blob = new Blob([event.data], { type: "audio/wav" });
           const file = new File([blob], "speech.wav");
 
-          const text = await SpeechToText.convert(file);
+          try {
+            const text = await SpeechToText.convert(file);
 
-          ws.send(text);
+            ws.send(text);
+          } catch (e) {
+            logger.error(e);
+          }
         },
         onClose: () => {},
       };
