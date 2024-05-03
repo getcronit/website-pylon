@@ -46,6 +46,7 @@ Do not include the title in the content, as it will be added automatically.
 The language used in the case study should be professional and should highlight the success of the project.
 The language (German, English, French) of the case study should be based on the language of the input content.
 Make sure the MDX content is formatted correctly.
+Provide a long and detailed case study that showcases the success of the project.
 `;
 
 export interface CaseStudyInfo {
